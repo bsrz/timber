@@ -1,6 +1,6 @@
 import Foundation
 
-enum MessageFormatter {
+public enum MessageFormatter {
 
     /// Formats a log message according to timber standards
     /// - Parameters:
@@ -8,7 +8,7 @@ enum MessageFormatter {
     ///   - config: The config used in the message format
     ///   - execution: The execution used in the mesage format
     /// - Returns: A formatted message as a string
-    static func format(message: Message, config: Configuration, execution: Execution) -> String {
+    public static func format(message: Message, config: Configuration, execution: Execution) -> String {
         let filename = URL(fileURLWithPath: message.file.description).lastPathComponent
         let msg: [String?] = [
             execution == .halt ? "🧨" : nil,
