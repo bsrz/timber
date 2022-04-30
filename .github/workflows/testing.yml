@@ -19,5 +19,9 @@ jobs:
         run: ls /Applications | grep Xcode
       - name: Select Xcode
         run: sudo xcode-select -switch /Applications/Xcode_13.2.1.app
-      - name: Run All Tests
+      - name: List SDKs
+        run: xcodebuild -showsdks
+      - name: Run all tests on iOS
         run: xcodebuild -scheme Timber -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 13 Pro' test
+      - name: Run all tests on macOS
+        run: xcodebuild -scheme Timber -sdk macosx12.1 -destination 'platform=macOS' clean test
