@@ -4,7 +4,7 @@ import Foundation
 ///
 /// The logger holds the configuration to pass down to all destinations.
 /// It also holds the precondition function to use to handle program execution.
-public class Logger {
+public class Logger: ObservableObject {
 
     public typealias Precondition = (@autoclosure () -> Bool, @autoclosure () -> String, StaticString, UInt) -> ()
 
