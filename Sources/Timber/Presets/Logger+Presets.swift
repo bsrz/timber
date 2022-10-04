@@ -8,4 +8,7 @@ extension Logger {
             destinations: [.timber]
         )
     )
+
+    /// A preset used for testing for when you have a dependency on a logger instance but don't want to log anything
+    static let noop: Logger = .init(config: .init(destinations: []))
 }
