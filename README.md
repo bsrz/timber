@@ -108,19 +108,6 @@ struct App: SwiftUI.App {
 }
 ```
 
-And it ships with a default logger for testing:
-
-```swift
-@testable import MyCoolProject
-import XCTest
-
-final class ViewModelTests: XCTestCase {
-    func testViewModel() throws {
-        let sut = ViewModel(logger: .noop) // won't log anyting
-    }
-}
-```
-
 # Custom Destination
 
 If you prefer to not use the logger that Timber ships with but want to have the same functionality, you can use this template and replace the values and names:
@@ -154,3 +141,83 @@ extension Timber.Logger {
     public static let custom: Timber.Logger = .init(config: .init(destinations: [.custom]))
 }
 ```
+
+You could decide to add a custom destination to save logs to files:
+
+```swift
+class FileLogger {
+
+    private var messages: [String] = []
+    private let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+
+    func send(_ message: Message, _ config: Configuration, _ execution: Execution) {
+        let msg = MessageFormatter.format(
+            message: message,
+            config: config,
+            execution: execution
+        )
+
+        messages.append(msg)
+
+        if messages.count >= 100 {
+            try? save()
+            messages = []
+        }
+    }
+
+    func flush() {
+        try? save()
+        messages = []
+    }
+
+    private func save() throws {
+        let content = messages
+            .map { $0 + "\n" }
+            .reduce(into: "") { result, element in
+                result += element
+            }
+        let data = content.data(using: .utf8)
+
+        try data?.write(to: url.appendingPathComponent(Date().description))
+    }
+}
+```
+
+and add it to your config:
+
+```swift
+let file = FileLogger()
+
+let config = Configuration(
+    destinations: [
+        simplePrint,
+        .init(
+            send:  file.send(_:_:_:),
+            flush: file.flush
+        )
+    ]
+)
+```
+
+Now the logs will be sent to the console _and_ saved on disk and you didnt' have to change any of your code consuming the logger.
+
+# Testing
+
+Timber ships with a default logger for testing:
+
+```swift
+@testable import MyCoolProject
+import XCTest
+
+final class ViewModelTests: XCTestCase {
+    func testViewModel() throws {
+        let sut = ViewModel(logger: .noop) // won't log anyting
+    }
+}
+```
+
+If you want to be explicit about testing logger output (for example, for PII compliance), you can provide an inline test logger and destination and test its output. [See LoggerTests.swift](https://github.com/bsrz/timber/blob/main/Tests/TimberTests/LoggerTests.swift) for an example.
+
+# License
+
+Timber is released under the MIT license. [See LICENSE](https://github.com/bsrz/timber/blob/main/LICENSE) for details.
