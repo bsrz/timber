@@ -221,3 +221,7 @@ If you want to be explicit about testing logger output (for example, for PII com
 # License
 
 Timber is released under the MIT license. [See LICENSE](https://github.com/bsrz/timber/blob/main/LICENSE) for details.
+
+# Credit
+
+This is a version of a micro library friends and I have been using for quite a while in private projects. Credit goes to [Ian Keen](https://github.com/IanKeen), [Mat Cartmill](https://github.com/matcartmill) and [Rebecca Duhard](https://github.com/rduhard) for contributing to this in one way or another over the years.
