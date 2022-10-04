@@ -2,25 +2,31 @@
 
 import PackageDescription
 
+extension String {
+    static let timber = "Timber"
+
+    static func tests(for name: String) -> Self { name + "Tests" }
+}
+
+extension Target.Dependency {
+    static let timber: Self = .init(stringLiteral: .timber)
+}
+
 let package = Package(
-    name: "Timber",
+    name: .timber,
     platforms: [.iOS(.v14), .macOS(.v11)],
     products: [
         .library(
-            name: "Timber",
-            targets: ["Timber"]
-        ),
+            name: .timber,
+            targets: [.timber]
+        )
     ],
-    dependencies: [
-    ],
+    dependencies: [],
     targets: [
-        .target(
-            name: "Timber",
-            dependencies: []
-        ),
+        .target(name: .timber),
         .testTarget(
-            name: "TimberTests",
-            dependencies: ["Timber"]
-        ),
+            name: .tests(for: .timber),
+            dependencies: [.timber]
+        )
     ]
 )
