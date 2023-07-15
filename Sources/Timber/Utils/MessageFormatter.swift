@@ -11,13 +11,13 @@ public enum MessageFormatter {
     public static func format(message: Message, config: Configuration, execution: Execution) -> String {
         let filename = URL(fileURLWithPath: message.file.description).lastPathComponent
         let msg: [String?] = [
-            execution == .halt ? "🧨" : nil,
+            execution.rawValue.isEmpty ? nil : execution.rawValue,
             message.level.name,
             "\(filename):\(message.line)",
             message.function.description,
             config.uniqueId?(),
             config.sessionId?(),
-            message.message
+            "\(message.value.external)"
         ]
 
         return msg

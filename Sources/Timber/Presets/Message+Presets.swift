@@ -8,10 +8,10 @@ extension Message {
     ///   - function: (Optional) The function containing the log message
     ///   - line: (Optional) The line containing the log message
     /// - Returns: A new log message under a default category
-    public static func `default`(_ level: Level, _ message: String..., file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
+    public static func `default`(_ level: Level, _ value: Value, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
         .init(
             level: level,
-            message: "[DEFAULT] " + message.spaced,
+            value: "[DEFAULT] \(value)",
             file: file,
             function: function,
             line: line
@@ -26,10 +26,10 @@ extension Message {
     ///   - function: (Optional) The function containing the log message
     ///   - line: (Optional) The line containing the log message
     /// - Returns: A new log message under an audio category
-    public static func audio(_ level: Level, _ message: String..., file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
+    public static func audio(_ level: Level, _ value: Value, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
         .init(
             level: level,
-            message: "[AUDIO] " + message.spaced,
+            value: "[AUDIO] \(value)",
             file: file,
             function: function,
             line: line
@@ -44,10 +44,10 @@ extension Message {
     ///   - function: (Optional) The function containing the log message
     ///   - line: (Optional) The line containing the log message
     /// - Returns: A new log message under a metrics category
-    public static func metrics(_ level: Level, _ message: String..., file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
+    public static func metrics(_ level: Level, _ value: Value, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
         .init(
             level: level,
-            message: "[METRICS] " + message.spaced,
+            value: "[METRICS] \(value)",
             file: file,
             function: function,
             line: line
@@ -62,10 +62,10 @@ extension Message {
     ///   - function: (Optional) The function containing the log message
     ///   - line: (Optional) The line containing the log message
     /// - Returns: A new log message under a default category
-    public static func network(_ level: Level, _ message: String..., file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
+    public static func network(_ level: Level, _ value: Value, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
         .init(
             level: level,
-            message: "[NETWORK] " + message.spaced,
+            value: "[NETWORK] \(value)",
             file: file,
             function: function,
             line: line
@@ -80,10 +80,10 @@ extension Message {
     ///   - function: (Optional) The function containing the log message
     ///   - line: (Optional) The line containing the log message
     /// - Returns: A new log message under an operation category
-    public static func operation(_ level: Level, _ message: String..., file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
+    public static func operation(_ level: Level, _ value: Value, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
         .init(
             level: level,
-            message: "[OPERATION] " + message.spaced,
+            value: "[OPERATION] \(value)",
             file: file,
             function: function,
             line: line
@@ -98,10 +98,10 @@ extension Message {
     ///   - function: (Optional) The function containing the log message
     ///   - line: (Optional) The line containing the log message
     /// - Returns: A new log message under a persistence category
-    public static func persistence(_ level: Level, _ message: String..., file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
+    public static func persistence(_ level: Level, _ value: Value, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
         .init(
             level: level,
-            message: "[PERSISTENCE] " + message.spaced,
+            value: "[PERSISTENCE] \(value)",
             file: file,
             function: function,
             line: line
@@ -116,10 +116,10 @@ extension Message {
     ///   - function: (Optional) The function containing the log message
     ///   - line: (Optional) The line containing the log message
     /// - Returns: A new log message under a UI category
-    public static func ui(_ level: Level, _ message: String..., file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
+    public static func ui(_ level: Level, _ value: Value, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
         .init(
             level: level,
-            message: "[UI] " + message.spaced,
+            value: "[UI] \(value)",
             file: file,
             function: function,
             line: line
@@ -134,10 +134,10 @@ extension Message {
     ///   - function: (Optional) The function containing the log message
     ///   - line: (Optional) The line containing the log message
     /// - Returns: A new log message under a video category
-    public static func video(_ level: Level, _ message: String..., file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
+    public static func video(_ level: Level, _ value: Value, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) -> Message {
         .init(
             level: level,
-            message: "[VIDEO] " + message.spaced,
+            value: "[VIDEO] \(value)",
             file: file,
             function: function,
             line: line
