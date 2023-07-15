@@ -15,4 +15,3 @@ extension Level {
     /// A level representing error log messages
     public static var error: Level { return .init(value: 4, name: "🟥 [Error]") }
 }
-

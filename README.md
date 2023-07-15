@@ -2,7 +2,7 @@
 
 # Overview
 
-Timber is a light weight abstraction for adding logs in your applications. It allows you to send logs to multiple places.
+Timber is a light weight abstraction for adding logs in your applications. It allows you to send logs to multiple destinations. It also supports redaction of sensitive information.
 
 You use an instance of the Logger class throughout your code and you provide a configuration at instantiation time with one or more destinations.
 
@@ -12,7 +12,7 @@ let simplePrint = Destination(
     send: { message, config, exec in
         // message: the message to log; contains a string, file, and line
 
-        // config: the logger config; contains unique and session id
+        // config: the logger config; contains unique and session id and other attributes
 
         // exec: either .continue or .halt; allowing you to enforce preconditions
 

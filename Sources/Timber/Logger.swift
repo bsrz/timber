@@ -1,6 +1,6 @@
 import Foundation
 
-/// A type used to log message
+/// A type used to log messages
 ///
 /// The logger holds the configuration to pass down to all destinations.
 /// It also holds the precondition function to use to handle program execution.
@@ -32,10 +32,17 @@ public class Logger: ObservableObject {
             $0.send(message, config, execution)
         }
 
-        precondition(execution == .continue, ["🧨", message.message].spaced, message.file, message.line)
+        precondition(execution == .continue, ["🧨", message.value.internal].spaced, message.file, message.line)
     }
 
     /// Flushes all destinations
+    ///
+    /// This gives an opportunity to each destination to handle certain actions, such as the app being terminated,
+    /// or going into the background.
+    ///
+    /// For example, you might have a destination that caches all the logs and send one single request to the server
+    /// when the app goes into the background. Calling `logger.flush()` when the app goes into the background gives the
+    /// destination the opportunity to do so.
     public func flush() {
         config.destinations
             .compactMap { $0.flush }

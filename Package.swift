@@ -1,14 +1,15 @@
-// swift-tools-version: 5.5
+// swift-tools-version: 5.8
 
 import PackageDescription
 
 extension String {
     static let timber = "Timber"
 
-    static func tests(for name: String) -> Self { name + "Tests" }
+    var tests: Self { self + "Tests" }
 }
 
 extension Target.Dependency {
+    static let algos: Self = .product(name: "Algorithms", package: "swift-algorithms")
     static let timber: Self = .init(stringLiteral: .timber)
 }
 
@@ -21,11 +22,13 @@ let package = Package(
             targets: [.timber]
         )
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-algorithms.git", from: .init(1, 0, 0))
+    ],
     targets: [
-        .target(name: .timber),
+        .target(name: .timber, dependencies: [.algos]),
         .testTarget(
-            name: .tests(for: .timber),
+            name: .timber.tests,
             dependencies: [.timber]
         )
     ]
